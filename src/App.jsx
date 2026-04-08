@@ -190,7 +190,8 @@ export default function CongratulationsPage() {
               alt="Macquarie Ice Rink logo"
             />
           </section>
-        <
+        </div>
+      </main>
     </>
   );
 }
