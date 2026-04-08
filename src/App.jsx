@@ -13,7 +13,7 @@ export default function CongratulationsPage() {
 
   return (
     <>
-      <link href="https://fonts.cdnfonts.com/css/coolvetica" rel="stylesheet" />
+      <link href="https://fonts.cdnfonts.com/css/coolvetica-2" rel="stylesheet" />
       <style>{`
         
 
@@ -36,7 +36,7 @@ export default function CongratulationsPage() {
         }
 
         body {
-          font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          font-family: 'Coolvetica', Arial, sans-serif;
         }
 
         .page {
