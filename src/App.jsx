@@ -1,21 +1,25 @@
+import React from "react";
+
 export default function CongratulationsPage() {
   const getParamValue = (key, fallback) => {
-    if (typeof window === 'undefined') return fallback;
+    if (typeof window === "undefined") return fallback;
     const params = new URLSearchParams(window.location.search);
     const raw = params.get(key) || fallback;
-    return decodeURIComponent(raw).replace(/^['\"]|['\"]$/g, '').trim() || fallback;
+    return decodeURIComponent(raw).replace(/^['\"]|['\"]$/g, "").trim() || fallback;
   };
 
-  const name = getParamValue('name', 'NAME').toUpperCase();
-  const reason = getParamValue('reason', '').toUpperCase();
+  const name = getParamValue("name", "NAME").toUpperCase();
+  const reason = getParamValue("reason", "").toUpperCase();
 
   return (
     <>
       <link href="https://fonts.cdnfonts.com/css/coolvetica" rel="stylesheet" />
-
       <style>{`
+        
+
         :root {
           --navy: #0b3558;
+          --blue-soft: #b7d8f2;
           --blue-mid: #8fc0e6;
           --blue-deep: #6eaee0;
           --white-soft: #f7fbff;
