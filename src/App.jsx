@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { toPng } from "html-to-image";
 
 export default function CongratulationsPage() {
+  const exportRef = useRef(null);
+
   const getParamValue = (key, fallback) => {
     if (typeof window === "undefined") return fallback;
     const params = new URLSearchParams(window.location.search);
@@ -10,6 +13,36 @@ export default function CongratulationsPage() {
 
   const name = getParamValue("name", "NAME").toUpperCase();
   const reason = getParamValue("reason", "").toUpperCase();
+
+  useEffect(() => {
+    const handleSave = async (event) => {
+      if (event.key?.toLowerCase() !== "s") return;
+      if (!exportRef.current) return;
+
+      event.preventDefault();
+
+      try {
+        const dataUrl = await toPng(exportRef.current, {
+          cacheBust: true,
+          pixelRatio: 2,
+          canvasWidth: 2048,
+          canvasHeight: 1280,
+          backgroundColor: "#ffffff",
+        });
+
+        const link = document.createElement("a");
+        link.download = `${name.replace(/[^A-Z0-9]+/g, "-") || "CONGRATULATIONS"}.png`;
+        link.href = dataUrl;
+        link.click();
+      } catch (error) {
+        console.error("PNG export failed", error);
+        window.print();
+      }
+    };
+
+    window.addEventListener("keydown", handleSave);
+    return () => window.removeEventListener("keydown", handleSave);
+  }, [name]);
 
   return (
     <>
@@ -49,14 +82,27 @@ export default function CongratulationsPage() {
           padding: 32px;
         }
 
+        .export-frame {
+          width: min(94vw, calc(94vh * 1.6));
+          aspect-ratio: 1024 / 640;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: linear-gradient(45deg, var(--blue-mid) 0%, var(--white-soft) 48%, var(--blue-deep) 100%);
+          overflow: hidden;
+          position: relative;
+        }
+
         .card {
           width: 100%;
-          max-width: 1100px;
+          height: 100%;
+          padding: 52px 56px;
           text-align: center;
           color: var(--navy);
           display: flex;
           flex-direction: column;
           align-items: center;
+          justify-content: center;
           gap: 18px;
         }
 
@@ -64,6 +110,7 @@ export default function CongratulationsPage() {
           width: clamp(120px, 18vw, 220px);
           height: auto;
           line-height: 1;
+          object-fit: contain;
         }
 
         .eyebrow {
@@ -96,48 +143,54 @@ export default function CongratulationsPage() {
         }
 
         .logo {
-          width: min(320px, 42vw);
+          width: min(280px, 30vw);
           height: auto;
-          margin-top: 18px;
+          margin-top: 12px;
           user-select: none;
           -webkit-user-drag: none;
         }
 
         @media (max-width: 640px) {
           .page {
-            padding: 24px;
+            padding: 16px;
+          }
+
+          .export-frame {
+            width: 100%;
           }
 
           .card {
-            gap: 14px;
+            padding: 28px 20px;
+            gap: 10px;
           }
 
           .logo {
-            width: min(240px, 55vw);
-            margin-top: 12px;
+            width: min(180px, 42vw);
+            margin-top: 8px;
           }
         }
       `}</style>
 
       <main className="page">
-        <section className="card">
-          <img
-            className="emoji"
-            src="/confetti.png"
-            alt="celebration"
-          />
+        <div className="export-frame" ref={exportRef}>
+          <section className="card">
+            <img
+              className="emoji"
+              src="/tada.png"
+              alt="celebration"
+            />
 
-          <h1 className="eyebrow">CONGRATULATIONS TO</h1>
-          <p className="name">{name}</p>
-          {reason ? <p className="reason">{reason}</p> : null}
+            <h1 className="eyebrow">CONGRATULATIONS TO</h1>
+            <p className="name">{name}</p>
+            {reason ? <p className="reason">{reason}</p> : null}
 
-          <img
-            className="logo"
-            src="https://images.squarespace-cdn.com/content/v1/56282670e4b0177c9d35a3be/1450058017378-0668CL2PJOL7HN7IX9SB/macquarie-ice-rink-front-page-logo.png?format=1500w"
-            alt="Macquarie Ice Rink logo"
-          />
-        </section>
-      </main>
+            <img
+              className="logo"
+              src="https://images.squarespace-cdn.com/content/v1/56282670e4b0177c9d35a3be/1450058017378-0668CL2PJOL7HN7IX9SB/macquarie-ice-rink-front-page-logo.png?format=1500w"
+              alt="Macquarie Ice Rink logo"
+            />
+          </section>
+        <
     </>
   );
 }
