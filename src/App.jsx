@@ -123,7 +123,7 @@ export default function CongratulationsPage() {
         <section className="card">
           <img
             className="emoji"
-            src="/tada.png"
+            src="/confetti.png"
             alt="celebration"
           />
 
