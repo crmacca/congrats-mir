@@ -36,7 +36,7 @@ export default function CongratulationsPage() {
         }
 
         body {
-          font-family: 'Coolvetica', 'Trebuchet MS', 'Arial Narrow', Arial, sans-serif;
+          font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
 
         .page {
@@ -61,7 +61,8 @@ export default function CongratulationsPage() {
         }
 
         .emoji {
-          font-size: clamp(5rem, 10vw, 8.5rem);
+          width: clamp(120px, 18vw, 220px);
+          height: auto;
           line-height: 1;
         }
 
@@ -120,9 +121,11 @@ export default function CongratulationsPage() {
 
       <main className="page">
         <section className="card">
-          <div className="emoji" aria-label="celebration emoji" role="img">
-            🎉
-          </div>
+          <img
+            className="emoji"
+            src="/tada.png"
+            alt="celebration"
+          />
 
           <h1 className="eyebrow">CONGRATULATIONS TO</h1>
           <p className="name">{name}</p>
