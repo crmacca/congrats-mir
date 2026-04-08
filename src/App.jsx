@@ -36,7 +36,7 @@ export default function CongratulationsPage() {
     const confettiImg = new Image();
     const logoImg = new Image();
     confettiImg.src = "/confetti.png";
-    logoImg.src = "/logo.png";
+    logoImg.src = "https://images.squarespace-cdn.com/content/v1/56282670e4b0177c9d35a3be/1450058017378-0668CL2PJOL7HN7IX9SB/macquarie-ice-rink-front-page-logo.png?format=1500w";
     confettiImgRef.current = confettiImg;
     logoImgRef.current = logoImg;
 
