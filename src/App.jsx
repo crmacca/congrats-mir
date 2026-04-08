@@ -28,6 +28,7 @@ export default function CongratulationsPage() {
           canvasWidth: 2048,
           canvasHeight: 1280,
           backgroundColor: "#ffffff",
+          useCORS: true
         });
 
         const link = document.createElement("a");
@@ -176,7 +177,7 @@ export default function CongratulationsPage() {
           <section className="card">
             <img
               className="emoji"
-              src="/tada.png"
+              src="/confetti.png"
               alt="celebration"
             />
 
@@ -185,6 +186,7 @@ export default function CongratulationsPage() {
             {reason ? <p className="reason">{reason}</p> : null}
 
             <img
+              crossOrigin="anonymous"
               className="logo"
               src="https://images.squarespace-cdn.com/content/v1/56282670e4b0177c9d35a3be/1450058017378-0668CL2PJOL7HN7IX9SB/macquarie-ice-rink-front-page-logo.png?format=1500w"
               alt="Macquarie Ice Rink logo"
