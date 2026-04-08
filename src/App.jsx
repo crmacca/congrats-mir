@@ -111,9 +111,9 @@ export default function CongratulationsPage() {
       const navy = "#0b3558";
 
       if (confettiImg.complete && confettiImg.naturalWidth > 0) {
-        const confettiWidth = 260;
+        const confettiWidth = 230;
         const confettiHeight = (confettiImg.naturalHeight / confettiImg.naturalWidth) * confettiWidth;
-        ctx.drawImage(confettiImg, centreX - confettiWidth / 2, 118, confettiWidth, confettiHeight);
+        ctx.drawImage(confettiImg, centreX - confettiWidth / 2, 70, confettiWidth, confettiHeight);
       }
 
       ctx.fillStyle = navy;
@@ -122,18 +122,18 @@ export default function CongratulationsPage() {
 
       const eyebrowSize = fitText(lines.eyebrow, 1500, 74, 400);
       ctx.font = `400 ${eyebrowSize}px Coolvetica, Arial, sans-serif`;
-      ctx.fillText(lines.eyebrow, centreX, 390);
+      ctx.fillText(lines.eyebrow, centreX, 345);
 
       const nameSize = fitText(lines.name, 1780, 200, 400);
       ctx.font = `400 ${nameSize}px Coolvetica, Arial, sans-serif`;
-      ctx.fillText(lines.name, centreX, 620, 1780);
+      ctx.fillText(lines.name, centreX, 585, 1780);
 
       let reasonBottom = 620;
       if (lines.reason) {
         reasonBottom = drawWrappedText({
           text: lines.reason,
           x: centreX,
-          y: 840,
+          y: 790,
           maxWidth: 1500,
           initialSize: 74,
           lineHeight: 82,
@@ -143,9 +143,9 @@ export default function CongratulationsPage() {
       }
 
       if (logoImg.complete && logoImg.naturalWidth > 0) {
-        const logoWidth = 420;
+        const logoWidth = 520;
         const logoHeight = (logoImg.naturalHeight / logoImg.naturalWidth) * logoWidth;
-        const logoY = Math.max(reasonBottom + 110, HEIGHT - 210);
+        const logoY = Math.min(Math.max(reasonBottom + 150, 1040), 1120);
         ctx.drawImage(logoImg, centreX - logoWidth / 2, logoY - logoHeight / 2, logoWidth, logoHeight);
       }
     };
